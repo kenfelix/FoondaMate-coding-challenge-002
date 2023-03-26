@@ -1,9 +1,5 @@
 # FoondaMate-coding-challenge-002
-How to start the application
-
-Watch the video: (below the video are the commands on how to start the application)
-
-    https://www.youtube.com/watch?v=Bw5rQXgvHYc
+##How to start the application
 
 The commands:
 
