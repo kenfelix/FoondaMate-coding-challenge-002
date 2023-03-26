@@ -1,5 +1,5 @@
 import pymongo
-from utils import hashpassword
+from .utils import hashpassword
 
 from .config import get_db
 from .models import PyObjectId, User

@@ -1,10 +1,11 @@
-from calc import solve_linear_equation
+from .calc import solve_linear_equation
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security.oauth2 import OAuth2PasswordRequestForm
-from oauth2 import create_access_token
-from utils import verify
+from .oauth2 import create_access_token
+from .utils import verify
+from .dependecies import get_current_user
 
-from .crud import get_user_by_email
+from .crud import get_user_by_email, create_user
 from .models import Token, User
 
 auth = APIRouter(tags=["Authentication"])
@@ -33,7 +34,7 @@ def login(
 
 
 @auth.post("/user", status_code=status.HTTP_201_CREATED, response_model=User)
-async def create_user(user: User):
+async def createUser(user: User):
     userIndb = get_user_by_email(email=user.email)
     if userIndb:
         raise HTTPException(
@@ -44,7 +45,10 @@ async def create_user(user: User):
 
 
 @cal.post("/calculate")
-async def solveEquation(equation: str):
+async def solveEquation(
+    equation: str,
+    current_active_user: User = Depends(get_current_user),
+):
     try:
         solution = solve_linear_equation(equation=equation)
     except ValueError:
@@ -53,3 +57,10 @@ async def solveEquation(equation: str):
             detail="invalid equation format",
         )
     return solution
+
+
+# def serializeDict(document) -> dict:
+#     return {
+#         **{i: str(document[i]) for i in document if i == "_id"},
+#         **{i: document[i] for i in document if i != "_id"},
+#     }

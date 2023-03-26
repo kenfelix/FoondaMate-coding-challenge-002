@@ -25,10 +25,8 @@ class User(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     email: EmailStr
     password: str
-    is_active: str
-    created_at: Optional[str] = datetime.utcnow()
-    timestamp: datetime = datetime.timestamp(datetime.utcnow())
-    last_login: str
+    created_at: Optional[datetime] = datetime.utcnow()
+    timestamp: Optional[datetime] = datetime.timestamp(datetime.utcnow())
 
     class Config:
         allow_population_by_field_name = True
@@ -36,12 +34,8 @@ class User(BaseModel):
         json_encoders = {ObjectId: str}
         schema_extra = {
             "example": {
-                "Email": "test@foondamate.com",
+                "email": "test@foondamate.com",
                 "password": "fakehashedsecret",
-                "is_active": "false",
-                "created_at": "datetime",
-                "timestamp": "datetime",
-                "last_login": "datetime",
             }
         }
 
@@ -49,3 +43,7 @@ class User(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str
+
+
+class TokenData(BaseModel):
+    email: EmailStr

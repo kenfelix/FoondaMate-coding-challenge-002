@@ -1,12 +1,15 @@
-version: "3.8"
+version: "3.9"
 
 services:
     api:
         build: ./app
         ports: 
-            - 80:80
+            - 8000:8000
         environment:
-            - DB_URL=mongodb://db/myTestDB
+            - DB_URL=mongodb://db/foondaMateDB
+            - SECRET_KEY=05f8d73444f5045fd9471ca9e48bcb4162d9fa7da72cee7e5210fbc408f59f41
+            - ALGORITHM=HS256
+            - ACCESS_TOKEN_EXPIRE_MINUTES=60
         volumes:
             - ./app:/app
     db:

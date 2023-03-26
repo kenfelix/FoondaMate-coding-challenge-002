@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .src.routers import auth
+from src.routers import auth, cal
 
-app = FastAPI(title="NEA GLOBAL api v1", docs_url="/api/docs", redoc_url="/api/redoc")
+app = FastAPI()
 
 origins = ["*"]
 
@@ -16,3 +16,4 @@ app.add_middleware(
 )
 
 app.include_router(auth)
+app.include_router(cal)

@@ -6,7 +6,7 @@ def get_db():
     cluster = settings.db_url
 
     client = MongoClient(cluster)
-    db = client.foondaMate
+    db = client.foondaMateDB
     return db
 
 
