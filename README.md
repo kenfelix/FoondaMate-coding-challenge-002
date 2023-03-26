@@ -22,8 +22,8 @@ For visualizing the application, open up your browser and enter:
 
 To see the runing containers in docker, enter in the terminal:
 
-$ docker ps
+    $ docker ps
 
-To see the database and collection created (database name is: myTestDB, collection: users) enter in your terminal:
+To see the database and collection created (database name is: foondaMateDB, collection: user) enter in your terminal:
 
-$ docker exec -it <container-id> bash
+    $ docker exec -it <container-id> bash
