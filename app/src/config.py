@@ -9,6 +9,7 @@ def get_db():
     db = client.foondaMate
     return db
 
+
 class Settings(BaseSettings):
     db_url: str
     secret_key: str

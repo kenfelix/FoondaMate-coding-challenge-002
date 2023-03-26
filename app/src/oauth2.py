@@ -1,12 +1,10 @@
-from jose import JWTError, jwt
-
 from datetime import datetime, timedelta
 
+from jose import JWTError, jwt
 from pydantic import ValidationError
 
-from .models import TokenData
 from .config import settings
-
+from .models import TokenData
 
 SECRET_KEY = settings.secret_key
 ALGORITHM = settings.algorithm

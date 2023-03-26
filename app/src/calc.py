@@ -3,7 +3,6 @@ from fractions import Fraction
 
 
 def solve_linear_equation(equation: str) -> dict:
-
     equation = equation.replace(" ", "")  # remove all whitespace
 
     # detect equation to solve
@@ -15,8 +14,8 @@ def solve_linear_equation(equation: str) -> dict:
 
     return solveAdvance(equation)
 
-def is_normal(equation: str) -> bool:
 
+def is_normal(equation: str) -> bool:
     # compile the regular expressions with IGNORECASE flag
     regex1 = re.compile(r"(^[+-]?\d*)[a-zA-Z]([+-]\d*)=([+-]?\d*)$", re.IGNORECASE)
     regex2 = re.compile(
@@ -34,6 +33,7 @@ def is_normal(equation: str) -> bool:
 
     # if neither regex1 nor regex2 matches, raise an error
     raise ValueError("Invalid equation.")
+
 
 def solveNormal(equation: str) -> dict:
     result: dict = {}
@@ -158,23 +158,26 @@ def solveAdvance(equation: str) -> dict:
     if b < 0:
         result.update(
             {
-                f"Add {int(abs(b))} to both sides": [f"{int(mul * a1)}{x}{(int(mul * b1)+int(b2)):+}={int(a2)}{x}{+int(c)}",
-                                                     f"{int(mul * a1)}{x}{(int(mul * b1)+int(b2)):+}+{int(abs(b))}={int(a2)}{x}{int(c):+}+{int(abs(b))}",
-                                                     f"{int(mul * a1)}{x}={int(a2)}{x}{int(c+abs(b)):+}"]                                                     
+                f"Add {int(abs(b))} to both sides": [
+                    f"{int(mul * a1)}{x}{(int(mul * b1)+int(b2)):+}={int(a2)}{x}{+int(c)}",
+                    f"{int(mul * a1)}{x}{(int(mul * b1)+int(b2)):+}+{int(abs(b))}={int(a2)}{x}{int(c):+}+{int(abs(b))}",
+                    f"{int(mul * a1)}{x}={int(a2)}{x}{int(c+abs(b)):+}",
+                ]
             }
         )
-        new_c = int(c+abs(b))
+        new_c = int(c + abs(b))
         x_value = (c + abs(b)) / a
     else:
         result.update(
             {
-                f"Subtract {int(abs(b))} from both sides": [f"{int(mul * a1)}{x}{(int(mul * b1)+int(b2)):+}={int(a2)}{x}{int(c):+}",
-                                                            f"{int(mul * a1)}{x}{(int(mul * b1)+int(b2)):+}-{int(abs(b))}={int(a2)}{x}{int(c):+}-{int(abs(b))}",
-                                                            f"{int(mul * a1)}{x}={int(a2)}{x}{int(c-abs(b)):+}"
-                                                            ]
+                f"Subtract {int(abs(b))} from both sides": [
+                    f"{int(mul * a1)}{x}{(int(mul * b1)+int(b2)):+}={int(a2)}{x}{int(c):+}",
+                    f"{int(mul * a1)}{x}{(int(mul * b1)+int(b2)):+}-{int(abs(b))}={int(a2)}{x}{int(c):+}-{int(abs(b))}",
+                    f"{int(mul * a1)}{x}={int(a2)}{x}{int(c-abs(b)):+}",
+                ]
             }
         )
-        new_c = int(c-abs(b))
+        new_c = int(c - abs(b))
         x_value = (c - abs(b)) / a
 
     if a2 < 0:
@@ -182,7 +185,7 @@ def solveAdvance(equation: str) -> dict:
             {
                 f"Add {int(abs(a2))}{x} to both sides": [
                     f"{int(mul * a1)}{x}+{int(abs(a2))}{x}={int(a2)}{x}+{int(abs(a2))}{x}{new_c:+}",
-                    f"{int(mul * a1)+int(abs(a2))}{x}={new_c}"
+                    f"{int(mul * a1)+int(abs(a2))}{x}={new_c}",
                 ]
             }
         )
@@ -191,7 +194,7 @@ def solveAdvance(equation: str) -> dict:
             {
                 f"Subtarct {int(abs(a2))}{x} from both sides": [
                     f"{int(mul * a1)}{x}-{int(abs(a2))}{x}={int(a2)}{x}-{int(abs(a2))}{x}{new_c:+}",
-                    f"{int(mul * a1)-int(abs(a2))}{x}={new_c}"
+                    f"{int(mul * a1)-int(abs(a2))}{x}={new_c}",
                 ]
             }
         )

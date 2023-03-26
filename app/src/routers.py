@@ -1,14 +1,14 @@
-from fastapi import APIRouter, Depends, status, HTTPException
+from calc import solve_linear_equation
+from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security.oauth2 import OAuth2PasswordRequestForm
-
-from .crud import get_user_by_email
-
-from .models import User, Token
 from oauth2 import create_access_token
 from utils import verify
 
+from .crud import get_user_by_email
+from .models import Token, User
 
 auth = APIRouter(tags=["Authentication"])
+cal = APIRouter(tags=["Caculatetion"])
 
 
 @auth.post("/login", response_model=Token)
@@ -28,9 +28,7 @@ def login(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Incorrect username or password",
         )
-    access_token = create_access_token(
-        data={"email": user.email}
-    )
+    access_token = create_access_token(data={"email": user.email})
     return {"access_token": access_token, "token_type": "bearer"}
 
 
@@ -43,3 +41,15 @@ async def create_user(user: User):
         )
     new_user_Indb = create_user(user=user)
     return new_user_Indb
+
+
+@cal.post("/calculate")
+async def solveEquation(equation: str):
+    try:
+        solution = solve_linear_equation(equation=equation)
+    except ValueError:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="invalid equation format",
+        )
+    return solution

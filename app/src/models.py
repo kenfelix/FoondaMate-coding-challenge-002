@@ -1,7 +1,8 @@
 from datetime import datetime
-from bson import ObjectId
-from pydantic import BaseModel, Field, EmailStr
 from typing import Optional
+
+from bson import ObjectId
+from pydantic import BaseModel, EmailStr, Field
 
 
 class PyObjectId(ObjectId):
@@ -24,7 +25,7 @@ class User(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     email: EmailStr
     password: str
-    is_active : str
+    is_active: str
     created_at: Optional[str] = datetime.utcnow()
     timestamp: datetime = datetime.timestamp(datetime.utcnow())
     last_login: str
@@ -40,10 +41,11 @@ class User(BaseModel):
                 "is_active": "false",
                 "created_at": "datetime",
                 "timestamp": "datetime",
-                "last_login": "datetime",   
+                "last_login": "datetime",
             }
         }
-        
+
+
 class Token(BaseModel):
     access_token: str
     token_type: str

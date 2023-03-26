@@ -1,7 +1,8 @@
-from .models import PyObjectId, User
-from .config import get_db
-from utils import hashpassword
 import pymongo
+from utils import hashpassword
+
+from .config import get_db
+from .models import PyObjectId, User
 
 db = get_db()
 
