@@ -11,28 +11,67 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [equation, setEquation] = useState("")
 
   const register = () => {
-    fetch('http://127.0.0.1:8000/user')
+    const opts = {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "email": email,
+        "password": password,
+      })
+    }
+    fetch('http://127.0.0.1:8000/user', opts)
+      .then(resp => {
+        if (resp.status === 201) return resp.json();
+        else alert("wasnt registered")
+      })
+      .then()
+      .catch(error => {
+        console.error("something went wrong", error)
+      })
   }
 
+  
+
   const login = () => {
+  
 
     const opts = {
       method: 'POST',
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: JSON.stringify({
-        "username": email,
-        "password": password,
-      })
+      body: new URLSearchParams({
+        'username': email,
+        'password': password,
+    })
     }
 
-    fetch('http://127.0.0.1:8000/login/', opts)
+    fetch('http://127.0.0.1:8000/login', opts)
       .then(resp => {
         if (resp.status === 200) return resp.json();
         else alert("Invalid credentials")
+      })
+      .then()
+      .catch(error => {
+        console.error("something went wrong", error)
+      })
+  }
+
+  const solve = () => {
+
+    const opts = {
+      method: 'POST',
+    }
+
+    fetch('http://127.0.0.1:8000/login?equation=' + equation, opts)
+      .then(resp => {
+        if (resp.status === 200) return resp.json();
+        else alert("Invalid equation")
       })
       .then()
       .catch(error => {
@@ -55,8 +94,8 @@ export default function Home() {
       </div>
       <div>
         <form className='flex flex-row justify-between items-center space-x-3'>
-          <input type="text" placeholder='input equation (e.g 7x-2=21 or 2(4x + 3)+3=24-4x)' className='bg-slate-300 border-1 border-solid border-purple-600 rounded-[16px] py-2 px-4' />
-          <input type="submit" value="Solve" className='bg-purple-600 rounded-[16px] py-2 px-4 text-white cursor-pointer' />
+          <input type="text" value={equation} onChange={(e) => setEquation(e.target.value)} placeholder='input equation (e.g 7x-2=21 or 2(4x + 3)+3=24-4x)' className='bg-slate-300 border-1 border-solid border-purple-600 rounded-[16px] py-2 px-4' />
+          <input type="submit" value="Solve" onClick={solve} className='bg-purple-600 rounded-[16px] py-2 px-4 text-white cursor-pointer' />
         </form>
       </div>
     </div>
