@@ -47,7 +47,7 @@ async def createUser(user: User):
 @cal.post("/calculate")
 async def solveEquation(
     equation: str,
-    # current_active_user: User = Depends(get_current_user),
+    current_active_user: User = Depends(get_current_user),
 ):
     try:
         solution = solve_linear_equation(equation=equation)

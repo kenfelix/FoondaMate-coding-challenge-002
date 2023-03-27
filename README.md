@@ -26,6 +26,8 @@ For visualizing the application, open up your browser and enter:
     http://127.0.0.1:8000/docs to see the api
     http://127.0.0.1:3000 to get access to the nextjs frontend
 
+    NOTE: frontend is not completed but all functionalities can be accessed via the API docs
+
 To see the runing containers in docker, enter in the terminal:
 
     $ docker ps
