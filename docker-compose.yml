@@ -18,5 +18,11 @@ services:
             - 27017:27017
         volumes:
             - taskdb:/data/db
+    front-end:
+        build: ./front-end
+        ports: 
+            - 3000:3000
+        volumes:
+            - ./front-end:/front-end
 volumes:
     taskdb:
