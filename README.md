@@ -1,5 +1,12 @@
 # FoondaMate-coding-challenge-002
+
 ## How to start the application
+
+The Requirement:
+
+Install docker desktop. Follow link to know how:
+
+    https://docs.docker.com/desktop/
 
 The commands:
 
@@ -18,7 +25,6 @@ For visualizing the application, open up your browser and enter:
 
     http://127.0.0.1:8000/docs to see the api
     http://127.0.0.1:3000 to get access to the nextjs frontend
-
 
 To see the runing containers in docker, enter in the terminal:
 
