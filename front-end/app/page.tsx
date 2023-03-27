@@ -36,7 +36,7 @@ export default function Home() {
       })
       .then()
       .catch(error => {
-        console.error("Isomething went wrong", error)
+        console.error("something went wrong", error)
       })
   }
   // useEffect(() => {
