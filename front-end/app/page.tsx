@@ -13,7 +13,7 @@ export default function Home() {
   const [password, setPassword] = useState("")
 
   const register = () => {
-    fetch('/user')
+    fetch('http://127.0.0.1:8000/user')
   }
 
   const login = () => {
@@ -21,15 +21,15 @@ export default function Home() {
     const opts = {
       method: 'POST',
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/x-www-form-urlencoded",
       },
       body: JSON.stringify({
         "username": email,
-        "password": password
+        "password": password,
       })
     }
 
-    fetch('/login', opts)
+    fetch('http://127.0.0.1:8000/login/', opts)
       .then(resp => {
         if (resp.status === 200) return resp.json();
         else alert("Invalid credentials")
